@@ -25,6 +25,12 @@ def send_vertify_code(phonenum):
 #requests还有django还flask这些都是第三方的，random是属于Pytho自带
 #自带包=库最先写，第三方次之，自己写的最下面
 
+def check_vcode():
+    pass
+
+
+
+
 
 
 

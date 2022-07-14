@@ -15,6 +15,7 @@ Including another URLconf
 """
 # 接口文件
 # import sys   #修改过的
+import json
 import sys
 import os
 
@@ -49,9 +50,10 @@ urlpatterns = [
     path('api/user/verfify', gen_vertify_code),
 
  ]
-# def re():
-#     return render('yanzhengmatest3.html',None)
-# re()
+# def re(request):
+#     html1=json.dumps('D:\Classes\GZ-1804\src\swiper\user\yanzhengmatest3.html')
+#     return render(request,html1)
+# re(request='GET')
 
 # urlpatterns = [ path('admin/', admin.site.urls), path('app/', include('gen_vertify_code')), ]
 

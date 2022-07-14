@@ -3,6 +3,9 @@ from django.db import models
 from django.utils.functional import cached_property
 
 # Create your models here.
+from lib.orm import ModelMixin
+
+
 class User(models.Model):
     # 用户数据模型
     SEX=(
@@ -42,13 +45,24 @@ class User(models.Model):
 # User.profile.location='guanugzhou'
 # new__user_profile
 
+    def to_dict(self):
+        return {
+            'id':self.id,
+            'nickname':self.nickname,
+            'phonenum':self.phonenum,
+            'sex':self.sex,
+            'avatar':self.avatar,
+            'location':self.location,
+            'age':self.age,
+
+        }
 
 
 
 
 
 
-class Profile(models.Model):
+class Profile(models.Model,ModelMixin):
     # 用户配置项
     SEX = (
         ('M', '男'), ('F', '女'),

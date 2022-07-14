@@ -6,6 +6,9 @@ from django.http import HttpResponse
 
 from logic import  send_vertify_code,gen_vertify_code
 from django.core.cache import cache
+from user.logic import  check_vcode
+from user.models import User
+from common import  error
 
 # Create your views here.
 
@@ -20,8 +23,18 @@ def get_vertify_code(request):    #其实返回render返回的也是HTTPRESPONSE
 
 def login(request):
     #短信验证码登录
-    cache.get(key)
-    pass
+    # cache.get(key)
+    phonenum=request.POST.get('phonenum')
+    vcode=request.POST.get('vcode')
+    if check_vcode():
+        #获取用户
+        user,created=User.objects.get_or_create(phonenum=phonenum)
+        #记录登录状态的的
+        request.session['id']=user.id
+        return render_json(user.to_dict(),0)
+    else:
+        return render_json(None,error.VCODE_ERROR)
+
 
 def get_profile(request):
     #获取个人资料

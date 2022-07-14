@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 import os
+import sys
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -45,7 +46,7 @@ MIDDLEWARE = [
     'common.middleware.Corsmiddleware',  #后面添加的
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',  #前端不好处理可以干掉这个的
+    # 'django.middleware.csrf.CsrfViewMiddleware',  #前端不好处理可以干掉这个的
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
@@ -54,7 +55,8 @@ ROOT_URLCONF = 'swiper.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        # 'DIRS': [os.path.join(BASE_DIR,'html')],   #后面增加的
+        'DIRS': [],  #
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
