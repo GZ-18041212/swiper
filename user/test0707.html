@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>欢迎来到田江南的博客</h1>
+<form method="post" >
+    {% csrf_token %}
+    <input type="text" name="username" placeholder="用户名" id="uname"/><br>
+    <input type="password" name="password" placeholder="密码" id="pass"><br>
+    <input type="button" value="注册" onclick="postfie()"/>
+</form>
+</body>
+<script src="../static/jquery-3.3.1.min.js"></script>
+<script>
+function postfie(){
+$.ajaxSetup({
+data: {csrfmiddlewaretoken: '{{ csrf_token }}' },
+});
+<!--获取用户名与密码-->
+var name=$('#uname').val()
+var pass=$('#pass').val()
+alert(name)
+$.ajax({
+url:'/regedits/',
+type:'POST',
+data:{'username':name,'password':pass},
+dataType:'JSON',
+success:function(data){
+var obj = eval(data);
+if(obj.data!=null){
+window.location.href="http://localhost:8000/succ/?name="+name;
+}
+},
+ error:function () {
+ alert("失败....")
+ }
+})
+
+}
+</script>
+</html>
